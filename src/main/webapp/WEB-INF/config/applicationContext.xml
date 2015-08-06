@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd"
+	default-autowire="byName">
+	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>	
+	<context:component-scan base-package="com.koumi.framework.product.rcs">
+		<context:exclude-filter type="regex"
+			expression="com.koumi.framework.product.rcs.restfulapi.*" />
+	</context:component-scan>
+	<!-- 数据源 -->
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+		<property name="url" value="jdbc:mysql://127.0.0.1:3306/test?&amp;useUnicode=true&amp;zeroDateTimeBehavior=convertToNull&amp;characterEncoding=UTF-8"></property>
+		<property name="username" value="root"></property>
+		<property name="password" value="root"></property>
+	</bean>
+	<!-- 配置SqlSessionFactoryBean -->
+	<bean name="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="configLocation" value="classpath:mybatis.xml"></property>
+		<!-- mapper和resultmap配置路径 -->
+		<property name="mapperLocations">
+			<list>
+				<!-- 表示在com.cunitsystem.entity包或以下所有目录中，以-resultmap.xml结尾所有文件 -->
+				<value>classpath:com/koumi/framework/product/rcs/entity/**/*-resultMap.xml</value>
+				<value>classpath:com/koumi/framework/product/rcs/entity/*-resultMap.xml</value>
+				<value>classpath:mapper/*-mapper.xml</value>
+			</list>
+		</property>
+	</bean>
+	<bean name="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	 <bean id="baseTransactionProxy" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" abstract="true">
+        <property name="transactionManager" ref="transactionManager" />
+        <property name="transactionAttributes">
+            <props>
+            	<prop key="insert*">PROPAGATION_REQUIRED</prop>
+            	<prop key="add*">PROPAGATION_REQUIRED</prop>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="update*">PROPAGATION_REQUIRED</prop>
+                <prop key="delete*">PROPAGATION_REQUIRED</prop>
+                <prop key="batch*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">readOnly</prop>
+            </props>
+        </property>
+    </bean>
+    
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.koumi.framework.product.rcs.mapper" />
+	</bean>
+	
+	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+	
+</beans>

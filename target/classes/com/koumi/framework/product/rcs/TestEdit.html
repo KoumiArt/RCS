@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Insert title here</title>
+	</head>
+	<body>
+	<script type="text/javascript">
+		$(function(){
+			$("#test_backId").click(function() {
+				closeWindow();
+				refreshTestList();
+			});
+			$("#stu_saveId").click(function() {
+				var r = $("#testForm").form("validate");
+				if(!r) {
+					return false;
+				}
+				
+				$.post(basePath+"/manager/saveTest",$("#testForm").serializeArray(),function(data){ 
+					if(data !=null && $.trim(data) != "" && data == true){
+						closeWindow();
+						//$.messager.alert("操作提示","保存成功！","info");
+						$.messager.show({
+							title:"操作提示",
+							msg:"保存成功！",
+							timeout:5000,
+							showType:"slide"
+						});
+						refreshTestList();
+					} else {
+						$.messager.alert("操作提示","保存失败！","error");
+					}						
+				});
+			});
+		});
+	</script>
+  	<center>
+		<form id="testForm" style="width:480;height:255;" action="/RCS/manager/saveResource" method="post">
+			<table style="font-size: 13px;" width="480" height="255">
+					<tr>
+					<td width="100px">主键：</td>
+					<td>
+					<input type="text" name="id" class="easyui-validatebox" data-options="required:true" /></td>			
+				</tr>
+					<tr>
+					<td width="100px">名称：</td>
+					<td>
+					<input type="text" name="Name" class="easyui-validatebox" data-options="required:true" /></td>			
+				</tr>
+					<tr>
+					<td width="100px">性别：</td>
+					<td>
+					<input type="text" name="Sex" class="easyui-validatebox" data-options="required:true" /></td>			
+				</tr>
+				<tr>
+					<td align="center" colspan="2">
+						<a id="test_backId" class="easyui-linkbutton" data-options="iconCls:'icon-back'">取消</a>
+					<span style="width: 56px"></span>
+						<a id="test_saveId" class="easyui-linkbutton" data-options="iconCls:'icon-save'">保存</a>
+					</td>
+				</tr>
+			</table>
+		</form>
+	</center>
+  </body>
+</html>

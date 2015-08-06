@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<config>
+	<database>
+		<type>mysql</type>
+		<driverClassName>com.mysql.jdbc.Driver</driverClassName>
+		<url>jdbc:mysql://127.0.0.1:3306/test?&amp;useUnicode=true&amp;zeroDateTimeBehavior=convertToNull&amp;characterEncoding=UTF-8</url>
+		<userName>root</userName>
+		<password>root</password>
+	</database>
+	<generate>
+		<projectPath>D:/workpro/RCS/src/main/java/</projectPath>
+		<templatePath>WEB-INF/classes/template/</templatePath>
+	</generate>
+</config>
