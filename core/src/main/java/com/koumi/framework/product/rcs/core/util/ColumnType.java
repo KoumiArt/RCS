@@ -1,4 +1,4 @@
-package com.koumi.framework.product.rcs.core.database.bean;
+package com.koumi.framework.product.rcs.core.util;
 
 public enum ColumnType {
 	VARCHAR("varchar","String"),

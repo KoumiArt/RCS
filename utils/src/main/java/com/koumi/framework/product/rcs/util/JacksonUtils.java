@@ -1,11 +1,15 @@
 package com.koumi.framework.product.rcs.util;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 public class JacksonUtils {
 
 	private static ObjectMapper mapper;
+	private static String defaultPattern = "yyyy-MM-dd";
 
 	/**
 	 * 获取ObjectMapper实例
@@ -31,7 +35,7 @@ public class JacksonUtils {
 	 * @return json字符串
 	 * @throws Exception
 	 */
-	public static String beanToJson(Object obj) throws Exception {
+	public static String toJson(Object obj) throws Exception {
 		try {
 			ObjectMapper objectMapper = getMapperInstance(false);
 			String json = objectMapper.writeValueAsString(obj);
@@ -42,6 +46,27 @@ public class JacksonUtils {
 	}
 
 	/**
+	 * 将java对象转换成json字符串,处理日期类型
+	 * @param obj
+	 * @param dateFormte
+	 * @return
+	 * @throws Exception
+	 */
+	public static String toJson(Object obj, String dateFormte)
+			throws Exception {
+		try {
+			ObjectMapper objectMapper = getMapperInstance(true);
+			dateFormte = StringUtils.isEmpy(dateFormte) ? defaultPattern : dateFormte;
+			DateFormat dateFormat = new SimpleDateFormat(dateFormte);
+			objectMapper.setDateFormat(dateFormat );
+			String json = objectMapper.writeValueAsString(obj);
+			return json;
+		} catch (Exception e) {
+			throw new Exception(e.getMessage());
+		}
+	}
+	
+	/**
 	 * 将java对象转换成json字符串
 	 * 
 	 * @param obj
@@ -51,7 +76,7 @@ public class JacksonUtils {
 	 * @return json字符串
 	 * @throws Exception
 	 */
-	public static String beanToJson(Object obj, Boolean createNew)
+	public static String toJson(Object obj, Boolean createNew)
 			throws Exception {
 		try {
 			ObjectMapper objectMapper = getMapperInstance(createNew);

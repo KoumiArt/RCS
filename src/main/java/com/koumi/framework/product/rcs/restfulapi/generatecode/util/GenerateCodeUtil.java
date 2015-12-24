@@ -107,7 +107,7 @@ public class GenerateCodeUtil {
 		Map<String, Object> baseParams = getBaseParams(tableName,packageName);
 		baseParams.put("columns", columns);
 		List<EasyUIColumn> easyUIColumns = this.getEasyUIColumns(columns);
-		baseParams.put("easyUIColumns", JacksonUtils.beanToJson(easyUIColumns));
+		baseParams.put("easyUIColumns", JacksonUtils.toJson(easyUIColumns));
 		generate(tableName, packageName,GenerateType.JS,baseParams);
 	}
 	

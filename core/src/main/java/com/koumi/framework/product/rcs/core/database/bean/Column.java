@@ -2,6 +2,7 @@ package com.koumi.framework.product.rcs.core.database.bean;
 
 import java.util.List;
 
+import com.koumi.framework.product.rcs.core.util.ColumnType;
 import com.koumi.framework.product.rcs.util.SystemUtils;
 
 /**
