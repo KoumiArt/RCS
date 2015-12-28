@@ -8,7 +8,8 @@
 		<password>root</password>
 	</database>
 	<generate>
-		<projectPath>D:/workpro/RCS/src/main/java/</projectPath>
+		<javaFilePath>D:/workspace/order_demo/TestRCS/src/main/java/</javaFilePath>
+		<appPath>D:/workspace/order_demo/TestRCS/src/main/webapp/app/</appPath>
 		<templatePath>WEB-INF/classes/template/</templatePath>
 	</generate>
 </config>

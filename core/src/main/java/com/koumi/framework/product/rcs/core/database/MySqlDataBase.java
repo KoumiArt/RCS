@@ -14,6 +14,7 @@ import com.koumi.framework.product.rcs.core.database.bean.DataBaseInfo;
 import com.koumi.framework.product.rcs.core.database.bean.PrimaryKey;
 import com.koumi.framework.product.rcs.core.database.bean.TableInfo;
 import com.koumi.framework.product.rcs.core.exception.DataBaseException;
+import com.koumi.framework.product.rcs.core.util.ColumnType;
 import com.koumi.framework.product.rcs.util.SystemConfigBean;
 
 public class MySqlDataBase implements IDataBase {
@@ -90,6 +91,8 @@ public class MySqlDataBase implements IDataBase {
 				column.setDigits(rs.getInt("DECIMAL_DIGITS")); 
 				column.setIsNULL(rs.getInt("NULLABLE")); 
 				column.setPrimaryKeys(getPrimaryKeys(metaData, tableName));
+				ColumnType columnType = ColumnType.getColumnType(rs.getString("TYPE_NAME"));
+				column.setColumnType(columnType);
 				columns.add(column);
 			}
 			if(rs != null)

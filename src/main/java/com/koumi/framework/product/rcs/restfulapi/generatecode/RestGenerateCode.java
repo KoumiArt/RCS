@@ -51,8 +51,8 @@ public class RestGenerateCode {
 			Map<String,Object> dbInfoMap = (Map<String,Object>)params.get("dbInfo");
 			DataBaseInfo dbInfo = SystemUtils.mapToObject(dbInfoMap, DataBaseInfo.class);
 			String tableName = params.get("tableName").toString();
-			String packageName = params.get("packageName").toString();
-			ErrorCode errorCode = generateCodeService.execute(dbInfo,tableName, packageName);
+			String basePackage = params.get("basePackage").toString();
+			ErrorCode errorCode = generateCodeService.execute(dbInfo,tableName, basePackage);
 			result.put("errorMsg", errorCode.getErrorMsg());
 			result.put("errorCode", errorCode.getErrorCode());
 		} catch (Exception e) {

@@ -1,4 +1,4 @@
-package ${package};
+package ${basePackage}.restful.api;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -7,9 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.koumi.framework.product.rcs.entity.${className};
-import com.koumi.framework.product.rcs.service.${className}Service;
-import com.koumi.framework.product.rcs.util.DataGrid;
+import ${basePackage}.entity.${className};
+import ${basePackage}.service.${className}Service;
+import ${basePackage}.util.DataGrid;
 
 
 @Controller

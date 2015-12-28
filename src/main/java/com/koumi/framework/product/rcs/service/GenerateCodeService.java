@@ -29,21 +29,21 @@ public class GenerateCodeService {
 		util.generateJs(tableName, packageName, columns);
 	}
 
-	public ErrorCode execute(DataBaseInfo dbInfo, String tableName,String packageName) throws Exception {
+	public ErrorCode execute(DataBaseInfo dbInfo, String tableName,String basePackage) throws Exception {
 		IDataBase db = DataBaseFactory.create(dbInfo.getType());
 		db.openSession(dbInfo);
 		List<Column> columns = db.selectColumns(tableName);
 		if(columns == null || columns.size() <= 0)
 			return ErrorCode.GENERATE_ERROR;
 		GenerateCodeUtil generateCodeUtil = new GenerateCodeUtil();
-		generateCodeUtil.generateEntity(tableName, packageName, columns);
-		generateCodeUtil.generateMapper(tableName, packageName);
-		generateCodeUtil.generateService(tableName, packageName);
-		generateCodeUtil.generateServiceImpl(tableName, packageName);
-		generateCodeUtil.generateController(tableName, packageName,columns);
-		generateCodeUtil.generateHtmlToList(tableName, packageName, columns);
-		generateCodeUtil.generateHtmlToEdit(tableName, packageName, columns);
-		generateCodeUtil.generateJs(tableName, packageName, columns);
+		generateCodeUtil.generateEntity(tableName, basePackage, columns);
+		generateCodeUtil.generateMapper(tableName, basePackage);
+		generateCodeUtil.generateService(tableName, basePackage);
+		generateCodeUtil.generateServiceImpl(tableName, basePackage);
+		generateCodeUtil.generateController(tableName, basePackage,columns);
+		generateCodeUtil.generateHtmlToList(tableName, basePackage, columns);
+		generateCodeUtil.generateHtmlToEdit(tableName, basePackage, columns);
+		generateCodeUtil.generateJs(tableName, basePackage, columns);
 		return ErrorCode.GENERATE_SUCCESS;
 	}
 	

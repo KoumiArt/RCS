@@ -1,11 +1,11 @@
-package ${package};
+package ${basePackage}.mapper;
 
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
-import com.koumi.framework.product.rcs.entity.${className};
+import ${basePackage}.entity.${className};
 
 /**
  * @author koumi

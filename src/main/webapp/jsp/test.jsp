@@ -19,7 +19,7 @@
 			"type" : "mysql"
 		},
 		tableName : "test",
-		packageName : "com.koumi.framework.product.rcs"
+		basePackage : "com.koumi.framework.product.test"
 	};
 	$.ajax({
 		url : "/RCS/code/generateCode",

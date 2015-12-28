@@ -27,9 +27,12 @@ public class Column {
 	private ColumnType columnType;
 	
 	public ColumnType getColumnType() {
-		columnType = ColumnType.getColumnType(type);
 		return columnType;
 	}
+	
+	public void setColumnType(ColumnType columnType){
+		this.columnType = columnType;
+	} 
 
 	private List<PrimaryKey> primaryKeys;
 	

@@ -23,19 +23,19 @@ public class FreemarkUtils {
 	 *            模板文件位置
 	 */
 	public FreemarkUtils(String templatePath,Object servletContext) {
-		configuration = new Configuration();
+		configuration = new Configuration(Configuration.VERSION_2_3_23);
 		configuration.setDefaultEncoding("utf-8");
 		configuration.setServletContextForTemplateLoading(servletContext, templatePath);
 	}
 	
 	public FreemarkUtils(String templatePath,Class<?> clazz) {
-		configuration = new Configuration();
+		configuration = new Configuration(Configuration.VERSION_2_3_23);
 		configuration.setDefaultEncoding("utf-8");
 		configuration.setClassForTemplateLoading(clazz, templatePath);
 	}
 	
 	public FreemarkUtils(String templatePath,File file) throws IOException {
-		configuration = new Configuration();
+		configuration = new Configuration(Configuration.VERSION_2_3_23);
 		configuration.setDefaultEncoding("utf-8");
 		configuration.setDirectoryForTemplateLoading(file);
 	}
@@ -47,7 +47,11 @@ public class FreemarkUtils {
         try {  
         	//获取模板信息  
             t = configuration.getTemplate(templateName); 
+            File mdkir = new File(filePath);
             File outFile = new File(filePath+"/"+fileName);  
+            if(!mdkir.exists()){
+            	mdkir.mkdirs();
+            }
         	out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outFile), "UTF-8")); 
             //输出数据到模板中，生成文件。  
             t.process(params, out);

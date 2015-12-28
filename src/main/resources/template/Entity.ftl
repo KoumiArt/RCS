@@ -1,4 +1,4 @@
-package ${package};
+package ${basePackage}.entity;
 
 public class ${className} {
 	<#list columns as column> 

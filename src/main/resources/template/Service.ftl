@@ -1,10 +1,10 @@
-package ${package};
+package ${basePackage}.service;
 
 import java.util.List;
 import java.util.Map;
 
-import com.koumi.framework.product.rcs.entity.${className};
-import com.koumi.framework.product.rcs.util.DataGrid;
+import ${basePackage}.entity.${className};
+import ${basePackage}.util.DataGrid;
 
 public interface ${className}Service {
 

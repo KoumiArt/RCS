@@ -1,12 +1,16 @@
 package com.koumi.framework.product.rcs.core.util;
 
+import com.koumi.framework.product.rcs.core.exception.UndefinedDataBaseColumnTypeException;
+
 public enum ColumnType {
 	VARCHAR("varchar","String"),
 	VARCHAR2("varchar2","String"),
 	NUMBER("number","int"),
 	DATE("date","Date"),
 	DATETIME("datetime","Date"),
-	INT("int","int");
+	INT("int","int"),
+	TINYINT("tinyint","int"),
+	DECIMAL("decimal","double");
 	
 	private String jdbcType;
 	
@@ -17,20 +21,12 @@ public enum ColumnType {
 		this.javaType = javaType;
 	}
 	
-	public static ColumnType getColumnType(String jdbcType){
-		if(jdbcType.trim().equalsIgnoreCase(VARCHAR.jdbcType))
-			return VARCHAR;
-		if(jdbcType.trim().equalsIgnoreCase(VARCHAR2.jdbcType))
-			return VARCHAR2;
-		if(jdbcType.trim().equalsIgnoreCase(NUMBER.jdbcType))
-			return NUMBER;
-		if(jdbcType.trim().equalsIgnoreCase(DATE.jdbcType))
-			return DATE;
-		if(jdbcType.trim().equalsIgnoreCase(DATETIME.jdbcType))
-			return DATETIME;
-		if(jdbcType.trim().equalsIgnoreCase(INT.jdbcType))
-			return INT;
-		return null;
+	public static ColumnType getColumnType(String jdbcType) throws UndefinedDataBaseColumnTypeException{
+		for (ColumnType columnType : ColumnType.values()) {
+			if(jdbcType.trim().equalsIgnoreCase(columnType.getJdbcType()))
+				return columnType;
+		}
+		throw new UndefinedDataBaseColumnTypeException("无法失败的类型:"+jdbcType);
 	}
 
 	public String getJdbcType() {
